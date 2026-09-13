@@ -1,0 +1,64 @@
+<!-- HERO SECTION -->
+<section class="hero-section">
+  <div class="hero-content">
+    <div class="badge">Tecnología de Alta Precisión</div>
+    <h1 class="hero-title">
+      Materializa tus ideas <br />
+      <span class="gradient-text">Capa por Capa</span>
+    </h1>
+    <p class="hero-subtitle">
+      Desde figuras coleccionables y utensilios de cocina, hasta componentes mecánicos y modificaciones automotrices. Si lo puedes imaginar, lo podemos imprimir.
+    </p>
+    <div class="hero-buttons">
+      <a routerLink="/catalogo/figuras" class="btn btn-primary">Ver Catálogo</a>
+      <a routerLink="/contacto" class="btn btn-secondary">Cotizar Diseño Personalizado</a>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORY CARDS SECTION -->
+<section class="categories-section">
+  <h2 class="section-title">¿Qué estás buscando?</h2>
+  
+  <div class="grid-container">
+    <a routerLink="/catalogo/repuestos-auto" class="category-card auto-parts">
+      <i class="fas fa-cogs card-icon"></i>
+      <h3>Piezas Automotrices</h3>
+      <p>Componentes de alta resistencia térmica para modificaciones y repuestos.</p>
+    </a>
+    
+    <a routerLink="/catalogo/figuras" class="category-card figures">
+      <i class="fas fa-gamepad card-icon"></i>
+      <h3>Figuras y Colección</h3>
+      <p>Detalle milimétrico en resina y PLA para tus personajes favoritos.</p>
+    </a>
+
+    <a routerLink="/catalogo/utensilios-cocina" class="category-card kitchen">
+      <i class="fas fa-utensils card-icon"></i>
+      <h3>Utensilios de Cocina</h3>
+      <p>Diseños prácticos y seguros para el uso diario en el hogar.</p>
+    </a>
+  </div>
+</section>
+
+<!-- FEATURED PRODUCTS SECTION (Usando @for Control Flow) -->
+<section class="featured-section">
+  <h2 class="section-title">Impresiones Destacadas</h2>
+  
+  <div class="grid-container">
+    @for (product of featuredProducts(); track product.id) {
+      <div class="product-card">
+        <div class="product-icon" [style.color]="product.color">
+          <i class="fas" [class]="product.icon"></i>
+        </div>
+        <div class="product-info">
+          <span class="product-category">{{ product.category }}</span>
+          <h3>{{ product.name }}</h3>
+          <span class="product-material"><i class="fas fa-layer-group"></i> {{ product.material }}</span>
+        </div>
+      </div>
+    } @empty {
+      <p>No hay productos destacados en este momento.</p>
+    }
+  </div>
+</section>
