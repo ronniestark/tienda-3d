@@ -3,7 +3,7 @@ name: Deploy Angular to GitHub Pages
 on:
   push:
     branches:
-      - main # O 'master', dependiendo del nombre de tu rama principal
+      - master # O 'master', dependiendo del nombre de tu rama principal
 
 # Otorga los permisos necesarios a GitHub Actions
 permissions:
