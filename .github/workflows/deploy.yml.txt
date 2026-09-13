@@ -1,0 +1,53 @@
+name: Deploy Angular to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # O 'master', dependiendo del nombre de tu rama principal
+
+# Otorga los permisos necesarios a GitHub Actions
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Construir proyecto Angular
+        # CAMBIA '/tienda-3d/' POR EL NOMBRE DE TU REPOSITORIO DE GITHUB
+        run: npm run build -- --base-href /tienda-3d/
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v4
+
+      - name: Subir artefacto (Archivos de compilación)
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # En Angular 17+, si activaste SSR, la ruta de salida web es 'browser'
+          path: './dist/tienda-3d/browser'
+
+      - name: Desplegar en GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
