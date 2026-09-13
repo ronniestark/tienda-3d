@@ -8,4 +8,15 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
-export class NavbarComponent { }
+export class NavbarComponent {
+  isMenuOpen = false;
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  // Cierra el menú automáticamente cuando el usuario hace clic en un enlace
+  closeMenu() {
+    this.isMenuOpen = false;
+  }
+}

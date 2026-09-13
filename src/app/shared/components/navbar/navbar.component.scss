@@ -1,6 +1,6 @@
-$bg-color: #0b0f19; // Fondo azul muy oscuro (basado en tu imagen)
+$bg-color: #0b0f19;
 $text-light: #e2e8f0;
-$accent-color: #1e3a8a; // Azul del botón activo
+$accent-color: #1e3a8a;
 $hover-color: #2563eb;
 
 .navbar {
@@ -24,7 +24,22 @@ $hover-color: #2563eb;
     cursor: pointer;
 
     .logo-icon {
-      color: #38bdf8; // Un toque de color cyan para impresoras 3D
+      color: #38bdf8;
+    }
+  }
+
+  /* Estilos del botón hamburguesa */
+  .menu-toggle {
+    display: none; // Oculto en escritorio
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #38bdf8;
     }
   }
 
@@ -43,7 +58,7 @@ $hover-color: #2563eb;
       color: $text-light;
       font-size: 0.95rem;
       padding: 0.5rem 1rem;
-      border-radius: 50px; // Forma de píldora
+      border-radius: 50px;
       transition: all 0.3s ease;
 
       i {
@@ -58,7 +73,6 @@ $hover-color: #2563eb;
         i { color: white; }
       }
 
-      // Estilo para la pestaña activa que mostraste en tu imagen
       &.active {
         background-color: $accent-color;
         color: white;
@@ -66,7 +80,50 @@ $hover-color: #2563eb;
         border: 1px solid rgba(56, 189, 248, 0.3);
         box-shadow: 0 0 10px rgba(30, 58, 138, 0.5);
         
-        i { color: #38bdf8; } // Ícono cyan cuando está activo
+        i { color: #38bdf8; }
+      }
+    }
+  }
+}
+
+/* RESPONSIVE DESIGN (Tablets y Celulares) */
+@media (max-width: 992px) {
+  .navbar {
+    .menu-toggle {
+      display: block; // Mostramos el botón
+    }
+
+    .nav-links {
+      /* Posicionamiento absoluto para que caiga debajo del navbar */
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: $bg-color;
+      flex-direction: column;
+      padding: 1.5rem 2rem;
+      gap: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+
+      /* Animación de entrada: Oculto por defecto */
+      opacity: 0;
+      transform: translateY(-20px);
+      pointer-events: none; // Evita clics cuando está invisible
+      transition: all 0.3s ease-in-out;
+
+      /* Cuando TypeScript inyecta la clase .show */
+      &.show {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      li a {
+        /* En móvil, los enlaces se ven mejor alineados a la izquierda y menos curvos */
+        justify-content: flex-start;
+        padding: 0.8rem 1rem;
+        border-radius: 8px; 
       }
     }
   }
